@@ -1,0 +1,43 @@
+{
+    "name": "Python Dev Container",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    // "onCreateCommand": {
+    //     "createVenv": "python3.10 -m venv .venv"
+    // },
+    // "waitFor" : "onCreateCommand",
+    "postCreateCommand": {
+        "changeGitConfig": "git config --global --add safe.directory /workspaces/test2",
+        // "createVenv": "python33.10 -m venv .venv",
+        "executeStartupCommand": ". .devcontainer/startup.sh"
+    },
+    "waitFor" : "postCreateCommand",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.pythonPath": "/usr/local/bin/python",
+                "python.languageServer": "Pylance",
+                "python.defaultInterpreterPath": "/usr/bin/python3.10",
+                "[python]": {
+                        "editor.formatOnSave": true,
+                        "editor.codeActionsOnSave": {
+                            "source.fixAll": "always",
+                            "source.organizeImports": "always"
+                        },
+                        "editor.defaultFormatter": "charliermarsh.ruff"
+                    }
+            },
+            "extensions": [
+                "ms-python.python",
+                "yzhang.markdown-all-in-one",
+                "ms-azuretools.vscode-docker",
+                "charliermarsh.ruff",
+                "ms-python.mypy-type-checker"
+            ]
+    },
+        "forwardPorts": "[]",
+        "remoteUser": "root"
+    }
+}
